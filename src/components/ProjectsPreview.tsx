@@ -5,10 +5,17 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const featuredProjects = [
-  { name: "C Life Church", category: "Religious", color: "#1a2035" },
-  { name: "Kaufman Civic Center", category: "Municipal", color: "#1a2820" },
-  { name: "Kleiman Evangelista Eye Center", category: "Healthcare", color: "#1a2020" },
-  { name: "Lion's Den Self Storage", category: "Industrial", color: "#2a1a10" },
+  { name: "C Life Church",                          category: "Religious",  photo: "/photos/project-church.jpg" },
+  { name: "Clements Ranch Community Center",        category: "Community",  photo: "/photos/proj-clements.jpg" },
+  { name: "FBC Kaufman – Children's Building",      category: "Religious",  photo: "/photos/proj-fbck-childrens.jpg" },
+  { name: "FBC Kaufman – Worship Center",           category: "Religious",  photo: "/photos/proj-fbck-worship.jpg" },
+  { name: "FBC Kaufman – The Porch",                category: "Religious",  photo: "/photos/proj-fbck-porch.jpg" },
+  { name: "Kleiman Evangelista Eye Center",         category: "Healthcare", photo: "/photos/project-eye.jpg" },
+  { name: "Lion's Den Self Storage",                category: "Industrial", photo: "/photos/project-storage.jpg" },
+  { name: "Kaufman Civic Center",                   category: "Municipal",  photo: "/photos/project-civic.jpg" },
+  { name: "St. Martin's Catholic Church",           category: "Religious",  photo: "/photos/proj-stmartins.jpg" },
+  { name: "First Presbyterian – Forney",            category: "Religious",  photo: "/photos/proj-firstpres.jpg" },
+  { name: "Kimley Horn",                            category: "Commercial", photo: "/photos/proj-kimleyhorn.jpg" },
 ];
 
 export default function ProjectsPreview() {
@@ -41,7 +48,7 @@ export default function ProjectsPreview() {
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {featuredProjects.map((project, i) => (
             <motion.div
               key={project.name}
@@ -49,29 +56,39 @@ export default function ProjectsPreview() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="relative overflow-hidden rounded-lg border group cursor-pointer"
-              style={{
-                backgroundColor: project.color,
-                borderColor: "#21262D",
-                minHeight: "200px",
-              }}
+              className="relative overflow-hidden rounded-lg group cursor-pointer"
+              style={{ minHeight: "320px" }}
             >
-              {/* Placeholder image fill */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-20">
-                <div
-                  className="w-24 h-24 rounded-full border-4"
-                  style={{ borderColor: "#F97316" }}
-                />
-              </div>
+              {/* Project photo */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={project.photo}
+                alt={project.name}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
 
-              {/* Hover overlay */}
+              {/* Gradient overlay — always on, darkens toward bottom */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: "linear-gradient(to top, rgba(13,17,23,0.95) 0%, rgba(13,17,23,0.4) 50%, rgba(13,17,23,0.1) 100%)",
+                }}
+              />
+
+              {/* Orange tint on hover */}
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ backgroundColor: "rgba(249,115,22,0.08)" }}
+                style={{ backgroundColor: "rgba(249,115,22,0.06)" }}
+              />
+
+              {/* Orange left border accent */}
+              <div
+                className="absolute left-0 top-0 bottom-0 w-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ backgroundColor: "#F97316" }}
               />
 
               {/* Content */}
-              <div className="relative p-8 flex flex-col justify-end h-full min-h-[200px]">
+              <div className="relative p-8 flex flex-col justify-end h-full min-h-[320px]">
                 <span
                   className="text-xs uppercase tracking-widest mb-2"
                   style={{ color: "#F97316" }}

@@ -1,35 +1,190 @@
 "use client";
 
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
+import ProjectLightbox, { LightboxProject } from "@/components/ProjectLightbox";
 import { motion } from "framer-motion";
 
-const projects = [
-  { name: "C Life Church", category: "Religious", color: "#111827" },
-  { name: "Clements Ranch Community Center", category: "Municipal", color: "#0f1f1a" },
-  { name: "FBC Kaufman — Beth James Children's Building", category: "Religious", color: "#111827" },
-  { name: "FBC Kaufman — Worship Center", category: "Religious", color: "#131820" },
-  { name: "FBC Kaufman — The Porch", category: "Religious", color: "#111827" },
-  { name: "Kleiman Evangelista Eye Center", category: "Healthcare", color: "#0f1a1a" },
-  { name: "Lion's Den Self Storage", category: "Industrial", color: "#1a1510" },
-  { name: "Kaufman Civic Center", category: "Municipal", color: "#0f1f1a" },
-  { name: "St. Martins Catholic Church", category: "Religious", color: "#111827" },
-  { name: "First Presbyterian — Forney", category: "Religious", color: "#131820" },
-  { name: "Kimley Horn", category: "General Office", color: "#131418" },
+const projects: (LightboxProject & { thumbnail: string })[] = [
+  {
+    name: "C Life Church",
+    category: "Religious",
+    thumbnail: "/photos/project-church.jpg",
+    photos: [
+      "/photos/c-life-church/7.jpg",
+      "/photos/c-life-church/1.jpg",
+      "/photos/c-life-church/2.jpg",
+      "/photos/c-life-church/3.jpg",
+      "/photos/c-life-church/4.jpg",
+      "/photos/c-life-church/5.jpg",
+      "/photos/c-life-church/6.jpg",
+    ],
+  },
+  {
+    name: "Clements Ranch Community Center",
+    category: "Community",
+    thumbnail: "/photos/proj-clements.jpg",
+    photos: [
+      "/photos/clements-ranch/3.jpg",
+      "/photos/clements-ranch/1.jpg",
+      "/photos/clements-ranch/2.jpg",
+      "/photos/clements-ranch/4.jpg",
+      "/photos/clements-ranch/5.jpg",
+      "/photos/clements-ranch/6.jpg",
+    ],
+  },
+  {
+    name: "FBC Kaufman — Children's Building",
+    category: "Religious",
+    thumbnail: "/photos/proj-fbck-childrens.jpg",
+    photos: [
+      "/photos/fbck-childrens/2.jpg",
+      "/photos/fbck-childrens/1.jpg",
+      "/photos/fbck-childrens/3.jpg",
+      "/photos/fbck-childrens/4.jpg",
+      "/photos/fbck-childrens/5.jpg",
+      "/photos/fbck-childrens/6.jpg",
+    ],
+  },
+  {
+    name: "FBC Kaufman — Worship Center",
+    category: "Religious",
+    thumbnail: "/photos/proj-fbck-worship.jpg",
+    photos: [
+      "/photos/fbck-worship/4.jpg",
+      "/photos/fbck-worship/1.jpg",
+      "/photos/fbck-worship/2.jpg",
+      "/photos/fbck-worship/3.jpg",
+      "/photos/fbck-worship/5.jpg",
+      "/photos/fbck-worship/6.jpg",
+    ],
+  },
+  {
+    name: "FBC Kaufman — The Porch",
+    category: "Religious",
+    thumbnail: "/photos/proj-fbck-porch.jpg",
+    photos: [
+      "/photos/fbck-porch/1.jpg",
+      "/photos/fbck-porch/2.jpg",
+      "/photos/fbck-porch/3.jpg",
+      "/photos/fbck-porch/4.jpg",
+      "/photos/fbck-porch/5.jpg",
+      "/photos/fbck-porch/6.jpg",
+    ],
+  },
+  {
+    name: "Kleiman Evangelista Eye Center",
+    category: "Healthcare",
+    thumbnail: "/photos/project-eye.jpg",
+    photos: [
+      "/photos/ke-eye-center/3.jpg",
+      "/photos/ke-eye-center/1.jpg",
+      "/photos/ke-eye-center/2.jpg",
+      "/photos/ke-eye-center/4.jpg",
+      "/photos/ke-eye-center/5.jpg",
+      "/photos/ke-eye-center/6.jpg",
+    ],
+  },
+  {
+    name: "Lion's Den Self Storage",
+    category: "Industrial",
+    thumbnail: "/photos/project-storage.jpg",
+    photos: [
+      "/photos/lions-den/1.jpg",
+      "/photos/lions-den/2.jpg",
+      "/photos/lions-den/3.jpg",
+      "/photos/lions-den/4.jpg",
+      "/photos/lions-den/5.jpg",
+      "/photos/lions-den/6.jpg",
+    ],
+  },
+  {
+    name: "Kaufman Civic Center",
+    category: "Municipal",
+    thumbnail: "/photos/project-civic.jpg",
+    photos: [
+      "/photos/kaufman-civic/1.jpg",
+      "/photos/kaufman-civic/2.jpg",
+      "/photos/kaufman-civic/3.jpg",
+      "/photos/kaufman-civic/4.jpg",
+      "/photos/kaufman-civic/5.jpg",
+      "/photos/kaufman-civic/6.jpg",
+      "/photos/kaufman-civic/7.jpg",
+    ],
+  },
+  {
+    name: "St. Martin's Catholic Church",
+    category: "Religious",
+    thumbnail: "/photos/proj-stmartins.jpg",
+    photos: [
+      "/photos/st-martins/2.jpg",
+      "/photos/st-martins/1.jpg",
+      "/photos/st-martins/3.jpg",
+      "/photos/st-martins/4.jpg",
+      "/photos/st-martins/5.jpg",
+      "/photos/st-martins/6.jpg",
+    ],
+  },
+  {
+    name: "First Presbyterian — Forney",
+    category: "Religious",
+    thumbnail: "/photos/proj-firstpres.jpg",
+    photos: [
+      "/photos/first-pres/1.jpg",
+      "/photos/first-pres/2.jpg",
+      "/photos/first-pres/3.jpg",
+      "/photos/first-pres/4.jpg",
+      "/photos/first-pres/5.jpg",
+      "/photos/first-pres/6.jpg",
+    ],
+  },
+  {
+    name: "Kimley Horn",
+    category: "Commercial",
+    thumbnail: "/photos/proj-kimleyhorn.jpg",
+    photos: [
+      "/photos/kimley-horn/1.jpg",
+      "/photos/kimley-horn/2.jpg",
+      "/photos/kimley-horn/3.jpg",
+      "/photos/kimley-horn/4.jpg",
+      "/photos/kimley-horn/5.jpg",
+      "/photos/kimley-horn/6.jpg",
+    ],
+  },
 ];
 
-const categories = ["All", "Religious", "Municipal", "Healthcare", "Industrial", "General Office"];
-
-const categoryColors: Record<string, string> = {
-  Religious: "#6366f1",
-  Municipal: "#22c55e",
-  Healthcare: "#06b6d4",
-  Industrial: "#f59e0b",
-  "General Office": "#8b5cf6",
-};
+const categories = ["All", "Religious", "Community", "Healthcare", "Industrial", "Municipal", "Commercial"];
 
 export default function ProjectsPage() {
+  const [active, setActive] = useState("All");
+  const [lightbox, setLightbox] = useState<{ project: LightboxProject; index: number } | null>(null);
+
+  const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
+
+  const openLightbox = (project: LightboxProject, index = 0) => {
+    setLightbox({ project, index });
+  };
+
+  const closeLightbox = () => setLightbox(null);
+
+  const nextPhoto = () => {
+    if (!lightbox) return;
+    setLightbox((prev) =>
+      prev ? { ...prev, index: (prev.index + 1) % prev.project.photos.length } : null
+    );
+  };
+
+  const prevPhoto = () => {
+    if (!lightbox) return;
+    setLightbox((prev) =>
+      prev
+        ? { ...prev, index: (prev.index - 1 + prev.project.photos.length) % prev.project.photos.length }
+        : null
+    );
+  };
+
   return (
     <>
       <Navbar />
@@ -74,27 +229,32 @@ export default function ProjectsPage() {
             >
               A selection of completed commercial projects across Texas — from
               houses of worship to healthcare facilities and civic centers.
+              <span className="block mt-1 text-sm" style={{ color: "#F97316" }}>
+                Click any project to view the full photo gallery.
+              </span>
             </motion.p>
           </div>
         </section>
 
-        {/* Category pills */}
+        {/* Category filter */}
         <section className="py-6 border-b" style={{ backgroundColor: "#0D1117", borderColor: "#21262D" }}>
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="flex flex-wrap gap-3">
               {categories.map((cat) => (
-                <span
+                <button
                   key={cat}
-                  className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border"
+                  onClick={() => setActive(cat)}
+                  className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border transition-all duration-200"
                   style={{
-                    borderColor: cat === "All" ? "#F97316" : "#21262D",
-                    color: cat === "All" ? "#F97316" : "#8B949E",
-                    backgroundColor: cat === "All" ? "rgba(249,115,22,0.1)" : "transparent",
+                    borderColor: active === cat ? "#F97316" : "#21262D",
+                    color: active === cat ? "#F97316" : "#8B949E",
+                    backgroundColor: active === cat ? "rgba(249,115,22,0.1)" : "transparent",
                     fontFamily: "var(--font-heading)",
+                    cursor: "pointer",
                   }}
                 >
                   {cat}
-                </span>
+                </button>
               ))}
             </div>
           </div>
@@ -104,44 +264,71 @@ export default function ProjectsPage() {
         <section className="py-16" style={{ backgroundColor: "#0D1117" }}>
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.map((project, i) => (
-                <motion.div
+              {filtered.map((project, i) => (
+                <motion.button
                   key={project.name}
+                  onClick={() => openLightbox(project)}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: (i % 3) * 0.1, duration: 0.5 }}
-                  className="relative overflow-hidden rounded-lg border group"
-                  style={{
-                    backgroundColor: project.color,
-                    borderColor: "#21262D",
-                    minHeight: "220px",
-                  }}
+                  transition={{ delay: (i % 3) * 0.08, duration: 0.5 }}
+                  className="relative overflow-hidden rounded-lg group text-left w-full"
+                  style={{ minHeight: "280px" }}
                 >
-                  {/* Decorative circle */}
-                  <div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full border-2 opacity-10"
-                    style={{ borderColor: categoryColors[project.category] ?? "#F97316" }}
-                  />
-                  <div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full opacity-10"
-                    style={{ backgroundColor: categoryColors[project.category] ?? "#F97316" }}
+                  {/* Project photo */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={project.thumbnail}
+                    alt={project.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
 
-                  {/* Hover overlay */}
+                  {/* Gradient overlay */}
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ backgroundColor: "rgba(249,115,22,0.06)" }}
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(13,17,23,0.95) 0%, rgba(13,17,23,0.35) 55%, rgba(13,17,23,0.05) 100%)",
+                    }}
                   />
 
-                  {/* Content */}
-                  <div className="relative p-6 flex flex-col justify-end h-full min-h-[220px]">
+                  {/* "View Gallery" pill — appears on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span
-                      className="text-xs font-bold uppercase tracking-widest mb-2"
+                      className="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest"
                       style={{
-                        color: categoryColors[project.category] ?? "#F97316",
+                        backgroundColor: "#F97316",
+                        color: "#0D1117",
                         fontFamily: "var(--font-heading)",
                       }}
+                    >
+                      View Gallery
+                    </span>
+                  </div>
+
+                  {/* Orange left border on hover */}
+                  <div
+                    className="absolute left-0 top-0 bottom-0 w-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{ backgroundColor: "#F97316" }}
+                  />
+
+                  {/* Photo count badge */}
+                  <div
+                    className="absolute top-4 right-4 px-2 py-0.5 rounded text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      backgroundColor: "rgba(13,17,23,0.8)",
+                      color: "#8B949E",
+                      fontFamily: "var(--font-heading)",
+                    }}
+                  >
+                    {project.photos.length} photos
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative p-6 flex flex-col justify-end h-full min-h-[280px]">
+                    <span
+                      className="text-xs font-bold uppercase tracking-widest mb-2"
+                      style={{ color: "#F97316", fontFamily: "var(--font-heading)" }}
                     >
                       {project.category}
                     </span>
@@ -152,7 +339,7 @@ export default function ProjectsPage() {
                       {project.name}
                     </h3>
                   </div>
-                </motion.div>
+                </motion.button>
               ))}
             </div>
           </div>
@@ -161,6 +348,18 @@ export default function ProjectsPage() {
         <CTABanner />
       </main>
       <Footer />
+
+      {/* Lightbox */}
+      {lightbox && (
+        <ProjectLightbox
+          project={lightbox.project}
+          photoIndex={lightbox.index}
+          onClose={closeLightbox}
+          onNext={nextPhoto}
+          onPrev={prevPhoto}
+          onSelectPhoto={(i) => setLightbox((prev) => prev ? { ...prev, index: i } : null)}
+        />
+      )}
     </>
   );
 }

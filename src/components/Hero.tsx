@@ -10,18 +10,24 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{ backgroundColor: "#0D1117" }}
     >
-      {/* Background grid pattern */}
+      {/* Full-screen background photo */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/photos/strip-fbck1.jpg"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+
+      {/* Dark overlay — keeps text readable */}
       <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `linear-gradient(#21262D 1px, transparent 1px), linear-gradient(90deg, #21262D 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-        }}
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(to bottom, rgba(13,17,23,0.72) 0%, rgba(13,17,23,0.85) 60%, #0D1117 100%)" }}
       />
 
       {/* Orange accent glow */}
       <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full opacity-10 blur-3xl pointer-events-none"
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full opacity-15 blur-3xl pointer-events-none"
         style={{ backgroundColor: "#F97316" }}
       />
 

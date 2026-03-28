@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import PhotoStrip from "@/components/PhotoStrip";
 import StatsBar from "@/components/StatsBar";
 import ServicesPreview from "@/components/ServicesPreview";
 import ProjectsPreview from "@/components/ProjectsPreview";
@@ -12,6 +13,7 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
+        <PhotoStrip />
         <StatsBar />
         <ServicesPreview />
         <ProjectsPreview />

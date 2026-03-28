@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, HardHat } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -35,19 +36,15 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <HardHat
-            size={28}
-            className="transition-colors duration-200"
-            style={{ color: "#F97316" }}
+        <Link href="/" className="flex items-center group">
+          <Image
+            src="/fivecoat-logo.png"
+            alt="Fivecoat Construction"
+            width={200}
+            height={50}
+            className="h-10 w-auto object-contain"
+            priority
           />
-          <span
-            className="text-xl font-bold tracking-widest uppercase"
-            style={{ fontFamily: "var(--font-heading)", color: "#F0F6FC" }}
-          >
-            Fivecoat
-            <span style={{ color: "#F97316" }}> Construction</span>
-          </span>
         </Link>
 
         {/* Desktop nav */}
