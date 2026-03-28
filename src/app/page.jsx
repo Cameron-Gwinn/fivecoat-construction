@@ -1,11 +1,15 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import PhotoStrip from "@/components/PhotoStrip";
-import StatsBar from "@/components/StatsBar";
-import ServicesPreview from "@/components/ServicesPreview";
-import ProjectsPreview from "@/components/ProjectsPreview";
-import CTABanner from "@/components/CTABanner";
-import Footer from "@/components/Footer";
+"use client";
+
+import dynamic from "next/dynamic";
+
+const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: false });
+const Hero = dynamic(() => import("@/components/Hero"), { ssr: false });
+const PhotoStrip = dynamic(() => import("@/components/PhotoStrip"), { ssr: false });
+const StatsBar = dynamic(() => import("@/components/StatsBar"), { ssr: false });
+const ServicesPreview = dynamic(() => import("@/components/ServicesPreview"), { ssr: false });
+const ProjectsPreview = dynamic(() => import("@/components/ProjectsPreview"), { ssr: false });
+const CTABanner = dynamic(() => import("@/components/CTABanner"), { ssr: false });
+const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
 
 export default function HomePage() {
   return (
