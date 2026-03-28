@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e) {
     e.preventDefault();
     setSubmitted(true);
   }

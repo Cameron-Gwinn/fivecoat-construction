@@ -4,21 +4,6 @@ import { useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
-export interface LightboxProject {
-  name: string;
-  category: string;
-  photos: string[];
-}
-
-interface Props {
-  project: LightboxProject;
-  photoIndex: number;
-  onClose: () => void;
-  onNext: () => void;
-  onPrev: () => void;
-  onSelectPhoto: (i: number) => void;
-}
-
 export default function ProjectLightbox({
   project,
   photoIndex,
@@ -26,10 +11,9 @@ export default function ProjectLightbox({
   onNext,
   onPrev,
   onSelectPhoto,
-}: Props) {
-  // Keyboard navigation
+}) {
   const handleKey = useCallback(
-    (e: KeyboardEvent) => {
+    (e) => {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowRight") onNext();
       if (e.key === "ArrowLeft") onPrev();
@@ -95,7 +79,6 @@ export default function ProjectLightbox({
           className="flex-1 relative flex items-center justify-center overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Prev button */}
           <button
             onClick={onPrev}
             className="absolute left-4 z-10 p-3 rounded-full transition-all duration-150 hover:scale-110"
@@ -105,7 +88,6 @@ export default function ProjectLightbox({
             <ChevronLeft size={28} />
           </button>
 
-          {/* Photo */}
           <AnimatePresence mode="wait">
             <motion.img
               key={photoIndex}
@@ -117,11 +99,9 @@ export default function ProjectLightbox({
               transition={{ duration: 0.25 }}
               className="max-h-full max-w-full object-contain"
               style={{ maxHeight: "calc(100vh - 200px)" }}
-              // eslint-disable-next-line @next/next/no-img-element
             />
           </AnimatePresence>
 
-          {/* Next button */}
           <button
             onClick={onNext}
             className="absolute right-4 z-10 p-3 rounded-full transition-all duration-150 hover:scale-110"
@@ -151,12 +131,7 @@ export default function ProjectLightbox({
                 opacity: i === photoIndex ? 1 : 0.5,
               }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={src}
-                alt=""
-                className="w-full h-full object-cover"
-              />
+              <img src={src} alt="" className="w-full h-full object-cover" />
             </button>
           ))}
         </div>
