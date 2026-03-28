@@ -4,10 +4,10 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
-import ProjectLightbox, { LightboxProject } from "@/components/ProjectLightbox";
+import ProjectLightbox from "@/components/ProjectLightbox";
 import { motion } from "framer-motion";
 
-const projects: (LightboxProject & { thumbnail: string })[] = [
+const projects = [
   {
     name: "C Life Church",
     category: "Religious",
@@ -159,11 +159,11 @@ const categories = ["All", "Religious", "Community", "Healthcare", "Industrial",
 
 export default function ProjectsPage() {
   const [active, setActive] = useState("All");
-  const [lightbox, setLightbox] = useState<{ project: LightboxProject; index: number } | null>(null);
+  const [lightbox, setLightbox] = useState(null);
 
   const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
 
-  const openLightbox = (project: LightboxProject, index = 0) => {
+  const openLightbox = (project, index = 0) => {
     setLightbox({ project, index });
   };
 
